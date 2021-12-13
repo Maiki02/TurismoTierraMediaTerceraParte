@@ -1,0 +1,23 @@
+*{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bolder;
+}
+
+body {
+	background-image: url("../img/fondo.jpg");
+	background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.titulo{
+	text-align: center;
+}
+
+#clima {
+	background: white;
+	margin: 20px;
+	padding: 20px;
+}
+
+
