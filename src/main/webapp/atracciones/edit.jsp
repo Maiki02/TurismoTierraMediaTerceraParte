@@ -26,6 +26,7 @@
 	</c:if>
 
 	<c:if test="${user.esAdmin()}">
+	
 		<c:forEach items="${atracciones}" var="atraccion">
 			<div class="accordion accordion-flush mb-1"
 				id="accordionFlushExample">

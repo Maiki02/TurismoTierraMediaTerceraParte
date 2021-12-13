@@ -6,7 +6,8 @@
 <head>
 
 <jsp:include page="../partials/head.jsp"></jsp:include>
-
+<script type="text/javascript" src="../assets/scripts/promociones.js"
+	defer></script>
 </head>
 
 <body>
@@ -41,7 +42,7 @@
 						<div class="accordion-body">
 							<form action="/TurismoTierraMedia/promociones/edit.do"
 								method="post">
-						
+
 								<div class="mb-3">
 									<input class="form-control" name="id" placeholder="ID" readonly
 										hidden value="${promocion.getID()}">
@@ -58,27 +59,17 @@
 										name="descripcion" placeholder="Descripcion de la atraccion"
 										required rows="3">${atraccion.getDescripcion()}</textarea>
 								</div>
-								
-								<div class="mb-3">
-									<label>Tipo de promocion:</label> <select class="form-select"
-										aria-label="Default select example" name="tipo-atraccion"
-										required>
-										<option value="AXB"
-											<c:if test="${promocion.getTipoAtraccion().toString().equals('AVENTURA') }">selected</c:if>>AXB
-										
-										<option value="PORCENTUAL"
-											<c:if test="${promocion.getTipoAtraccion().toString().equals('DEGUSTACION') }">selected</c:if>>PORCENTUAL</option>
-										<option value="ABSOLUTA"
-											<c:if test="${promocion.getTipoAtraccion().toString().equals('PAISAJE') }">selected</c:if>>ABSOLUTA</option>
-									</select>
-								</div>
-								
+
 								<div class="mb-3">
 									<label>Tipo de atraccion:</label> <select class="form-select"
 										aria-label="Default select example" name="tipo-atraccion"
 										required>
 										<option value="AVENTURA"
 											<c:if test="${promocion.getTipoAtraccion().toString().equals('AVENTURA') }">selected</c:if>>AVENTURA
+
+
+
+
 										
 										<option value="DEGUSTACION"
 											<c:if test="${promocion.getTipoAtraccion().toString().equals('DEGUSTACION') }">selected</c:if>>DEGUSTACION</option>
@@ -86,9 +77,35 @@
 											<c:if test="${promocion.getTipoAtraccion().toString().equals('PAISAJE') }">selected</c:if>>PAISAJE</option>
 									</select>
 								</div>
+
+								<div class="btn-group" role="group" aria-label="Basic example">
+									<button type="button" class="btn btn-primary" id="boton-axb"
+										onclick="aparecerAXB()">AXB</button>
+									<button type="button" class="btn btn-primary"
+										id="boton-absoluta" onclick="aparecerAbsoluta()">ABSOLUTA</button>
+									<button type="button" class="btn btn-primary"
+										id="boton-porcentual" onclick="aparecerPorcentual()">PORCENTUAL</button>
+								</div>
+
 								<div class="mb-3">
-									<label>Atracciones involucradas:</label> 
-									<select
+									<input class="form-control" id="atraccion-premio"
+										name="atraccion-premio" placeholder="Atraccion Premio"
+										type="hidden" value="10">
+								</div>
+								<div class="mb-3">
+									<input class="form-control" id="porcentaje-descuento"
+									 name="porcentaje-descuento"
+										placeholder="Porcentaje descuento" type="hidden">
+								</div>
+								<div class="mb-3">
+									<input class="form-control" id="precio-absoluto"
+										name="precio-absoluto" placeholder="Precio final"
+										type="hidden">
+								</div>
+
+
+								<div class="mb-3">
+									<label>Atracciones involucradas:</label> <select
 										class="form-select" aria-label="Default select example"
 										name="premio" required>
 										<c:forEach items="${atracciones}" var="atraccion">
@@ -106,6 +123,7 @@
 								<div>
 									<button type="submit" class="btn btn-success">Guardar</button>
 								</div>
+
 							</form>
 						</div>
 					</div>
