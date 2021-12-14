@@ -13,6 +13,7 @@ public class Absoluta extends Promocion {
 			double valorDeBeneficio, int id, String descripcion) throws ValorNegativo, AtraccionDeDistintoTipo {
 		super(nombre, tipoAtraccion, atracciones, id, descripcion);
 		setValorDeBeneficio(valorDeBeneficio);
+		this.esValida=true;
 	}
 
 	/*

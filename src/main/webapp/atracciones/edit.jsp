@@ -7,8 +7,7 @@
 
 <jsp:include page="../partials/head.jsp"></jsp:include>
 <link href="../assets/stylesheets/base.css" rel="stylesheet" />
-<!--  --<link href="../assets/stylesheets/listadoAtracciones.css"
-	rel="stylesheet" />-->
+
 </head>
 
 <body>
@@ -26,31 +25,33 @@
 	</c:if>
 
 	<c:if test="${user.esAdmin()}">
-	
-		<c:forEach items="${atracciones}" var="atraccion">
+
+		<c:forEach items="${atracciones}" var="atraccion" varStatus="loop">
+
 			<div class="accordion accordion-flush mb-1"
-				id="accordionFlushExample">
+				id="accordionFlush-${loop.count}">
 				<div class="accordion-item">
-					<h2 class="accordion-header" id="flush-headingOne">
+					<h2 class="accordion-header" id="flush-heading-${loop.count}">
 						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+							data-bs-toggle="collapse"
+							data-bs-target="#flush-collapse-${loop.count}"
 							aria-expanded="false" aria-controls="flush-collapseOne">
 							<c:out value="${atraccion.getNombre()}"></c:out>
 						</button>
 					</h2>
-					<div id="flush-collapseOne" class="accordion-collapse collapse"
-						aria-labelledby="flush-headingOne"
-						data-bs-parent="#accordionFlushExample">
+					<div id="flush-collapse-${loop.count}"
+						class="accordion-collapse collapse"
+						aria-labelledby="flush-heading-${loop.count}"
+						data-bs-parent="#accordionFlush-${loop.count}">
 						<div class="accordion-body">
 							<form action="/TurismoTierraMedia/atracciones/edit.do"
 								method="post">
-								
+
 								<div class="mb-3">
-									<input class="form-control" name="id"
-										placeholder="ID" readonly hidden
-										value="${atraccion.getID()}">
+									<input class="form-control" name="id" placeholder="ID" readonly
+										hidden value="${atraccion.getID()}">
 								</div>
-								
+
 								<div class="mb-3">
 									<input class="form-control input-lg" name="nombre"
 										placeholder="Nombre Atraccion"
@@ -78,6 +79,7 @@
 										name="tipo-atraccion" required>
 										<option value="AVENTURA"
 											<c:if test="${atraccion.getTipoAtraccion().toString().equals('AVENTURA') }">selected</c:if>>AVENTURA
+
 										
 										<option value="DEGUSTACION"
 											<c:if test="${atraccion.getTipoAtraccion().toString().equals('DEGUSTACION') }">selected</c:if>>DEGUSTACION</option>

@@ -34,7 +34,7 @@
 	<c:if test="${user.esAdmin()}">
 		<div id="botones">
 			<div class="mb-3">
-				<a href="#" class="btn btn-primary" role="button"> <i
+				<a href="/TurismoTierraMedia/promociones/create.do" class="btn btn-primary" role="button"> <i
 					class="bi bi-plus-lg"></i> Nueva Promocion
 				</a>
 			</div>
@@ -81,7 +81,7 @@
 					<p>
 						Atracciones involucradas:
 						<c:forEach items="${promocion.getAtracciones()}" var="atraccion">
-							<c:out value="atraccion.getNombre()" />
+							<c:out value="${atraccion.getNombre()}. " />
 						</c:forEach>
 					</p>
 					<button type="button" class="btn btn-success">COMPRAR</button>

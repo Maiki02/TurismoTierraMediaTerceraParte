@@ -1,0 +1,129 @@
+
+
+.encabezado h1 {
+  text-align: center;
+  font-size: 5rem;
+  padding-top: 3rem;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-weight: 100;
+  
+}
+
+.encabezado h2 {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-weight: 100;
+  padding-bottom: 50px;
+}
+
+.container {
+  align-items: center;
+  background: white;
+  position: relative;
+  display: flex;
+  height: 1100px;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px black;
+
+  justify-content: space-between;
+  
+ 
+}
+
+.container .box-atracciones {
+  position: relative;
+  background: #fff;
+  margin: 10px;
+  padding: 15px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
+  
+  
+}
+
+
+
+.container .box-atracciones .slider-atracciones {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  border-radius: 20px;
+
+ 
+  
+}
+
+
+.container .box-atracciones .texto-atracciones {
+  text-align: left;
+  
+}
+
+#boton-atracciones{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+
+
+.promociones{
+    
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    margin-top: 40px;
+
+    
+    
+    
+}
+
+.promociones h4{
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 40px;
+    background:  linear-gradient( 135deg, #FDD819 10%, #E80505 100%);
+    width: 500px;
+    margin-right: 40px;
+    border-radius: 20px;
+
+
+}
+
+
+
+.promociones img{
+    width: 500px;
+    height: 300px;
+    
+    border-radius: 20px;
+}
+
+button {
+    background-color: rgb(107, 179, 35);
+    border: .1rem solid rgba(0, 0, 0, .10);
+    border-radius: 5px;
+    position: relative;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    margin: 20px;
+    height: 35px;
+    width: 150px;
+}
+
+@media (max-width: 991px) {
+  .container {
+    flex-direction: column;
+  }
+}

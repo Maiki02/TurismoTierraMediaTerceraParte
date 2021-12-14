@@ -26,48 +26,33 @@ public class EditPromotionServlet extends HttpServlet {
 		super.init();
 		this.promotionService = new PromotionService();
 	}
-	
-
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Redireccionando");
 		List<Promocion> promociones = promotionService.list();
-		List<Atraccion> atracciones = DAOFactory.getAtraccionDAO().listar(1); //listamos las validas
-		
+		List<Atraccion> atracciones = DAOFactory.getAtraccionDAO().listar(1); // listamos las validas
+
 		req.setAttribute("promociones", promociones);
 		req.setAttribute("atracciones", atracciones);
-		System.out.println("Redireccionando");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones/edit.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id"));
-		String nombre = req.getParameter("nombre");
-		TipoDeAtraccion tipoAtraccion = TipoDeAtraccion.valueOf(req.getParameter("tipo-atraccion"));
-		TipoDePromocion tipoPromocion= TipoDePromocion.valueOf(req.getParameter("tipo-promocion"));
-		String descripcion= req.getParameter("descripcion");
-		if(tipoPromocion == TipoDePromocion.AXB) {
-			Atraccion atraccion=req.getParameter("atraccion-premio");
-		} else if (tipoPromocion == TipoDePromocion.ABSOLUTA) {
-			Double costo=Double.parseDouble(req.getParameter("costo-absoluto"));
-		} else if (tipoPromocion == TipoDePromocion.PORCENTUAL) {
-			Double descuento=Double.parseDouble(req.getParameter("porcentaje-descuento"));
-		}
-		
-		List<Atraccion> atraccionesInvolucradas= req.getParameter("atracciones-involucradas");
-
-		Promocion promocion = promotionService.update(id, nombre, costo, tipoAtraccion, descuento, id, tipoAtraccion, descripcion);
-
-		if (promocion.isValid()) {
-			resp.sendRedirect("/TurismoTierraMedia/atracciones/index.do");
-		} else {
-			req.setAttribute("promocion", promocion);
-
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/TurismoTierraMedia/atracciones/edit.jsp");
+		try {
+			Integer id = Integer.parseInt(req.getParameter("id")); // La id se mantiene igual
+			Promocion promocion = promotionService.crearPromocion(req, id);
+			promotionService.update(promocion);
+			
+			
+			resp.sendRedirect("/TurismoTierraMedia/promociones/index.do");
+		} catch (Exception e) {
+			req.setAttribute("flash", "Se ha presentado un error");
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/TurismoTierraMedia/promociones/edit.jsp");
 			dispatcher.forward(req, resp);
-		}*/
+		}
 	}
+
 }

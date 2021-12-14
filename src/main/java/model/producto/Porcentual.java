@@ -13,6 +13,7 @@ public class Porcentual extends Promocion {
 			double porcentajeDescuento, int id, String descripcion) throws ValorNegativo, AtraccionDeDistintoTipo{
 		super(nombre, tipoAtraccion, atracciones, id, descripcion);
 		setPorcentajeDescuento(porcentajeDescuento);
+		this.esValida=true;
 	}
 
 	/*

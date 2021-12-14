@@ -13,4 +13,12 @@ public interface iPromocionDAO {
 	
 	public int actualizar(Promocion promocion);
 
+	public abstract int actualizarListaDeAtraccionesInvolucradas(Promocion promocion, Atraccion atraccion);
+
+	int borrarListaDeAtraccionesInvolucradas(Promocion promocion);
+
+	public abstract int insert(Promocion promocion);
+
+	Integer obtenerUltimaIDUtilizada();
+
 }

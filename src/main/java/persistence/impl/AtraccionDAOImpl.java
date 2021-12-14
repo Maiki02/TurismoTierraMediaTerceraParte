@@ -16,6 +16,10 @@ public class AtraccionDAOImpl implements iAtraccionDAO {
 			+ "FROM atracciones JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = atracciones.id_tipo_atraccion "
 			+ "WHERE es_valida=";
 
+	private static final String SQL_FIND_BY_ATTRACTION_NAME = "SELECT id_atraccion, nombre_atraccion, costo_atraccion, tiempo_atraccion, cupo, tipo_atraccion, descripcion "
+			+ "FROM atracciones JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = atracciones.id_tipo_atraccion "
+			+ "WHERE nombre_atraccion=? and es_valida=1;";
+
 	private static final String SQL_ACTUALIZAR = "UPDATE atracciones SET nombre_atraccion=?, tiempo_atraccion=?, costo_atraccion=?, cupo=?, id_tipo_atraccion=?, descripcion=?, es_valida=? WHERE id_atraccion = ?";
 
 	@Override
@@ -32,7 +36,7 @@ public class AtraccionDAOImpl implements iAtraccionDAO {
 				try {
 
 					Atraccion atraccion = toAtraccion(rs);
-						atracciones.add(atraccion);
+					atracciones.add(atraccion);
 
 				} catch (ValorNegativo ne) {
 					System.err.println(ne.getMessage() + " en la id: " + id_atraccion);
@@ -80,7 +84,7 @@ public class AtraccionDAOImpl implements iAtraccionDAO {
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, atraccion.getId());
+			statement.setInt(1, atraccion.getID());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -173,6 +177,36 @@ public class AtraccionDAOImpl implements iAtraccionDAO {
 		} catch (Exception e) {
 			throw new DatosPerdidos(e);
 		}
+	}
+
+	@Override
+	public Atraccion findByAttractionName(String nombre) {
+		try {
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(SQL_FIND_BY_ATTRACTION_NAME);
+			statement.setString(1, nombre);
+			ResultSet resultados = statement.executeQuery();
+			Atraccion atraccion;
+			while (resultados.next()) {
+				try {
+
+					return toAtraccion(resultados);
+
+				} catch (ValorNegativo ne) {
+					System.err.println(ne.getMessage());
+				} catch (NumberFormatException e) {
+					System.err.println("Uno de los datos leidos no es un numero valido");
+				} catch (IllegalArgumentException iae) {
+					System.err.println("Tipo de atraccion no reconocida");
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			}
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+		return null;
 	}
 
 }

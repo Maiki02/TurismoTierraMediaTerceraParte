@@ -16,4 +16,6 @@ public interface iAtraccionDAO {
 	public Atraccion find(Integer id);
 	public int delete(Atraccion atraccion);
 
+	Atraccion findByAttractionName(String nombre);
+
 }

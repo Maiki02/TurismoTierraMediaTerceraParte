@@ -62,10 +62,6 @@ public abstract class Producto {
 	//---------------------------------
 
 	// Getters: retornan sus atributos
-	
-	public int getId() {
-		return id;
-	}
 
 	public String getNombre() {
 		return this.nombre;

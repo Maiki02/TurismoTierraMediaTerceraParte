@@ -24,10 +24,18 @@ public class PromocionDAOImpl implements iPromocionDAO {
 			+ "LEFT JOIN tipo_promocion ON tipo_promocion.id_tipo_promocion = promociones.id_tipo_promocion "
 			+ "WHERE id_promocion=? and promociones.es_valida=1;";
 
-	private static final String SQL_ACTUALIZAR_ABSOLUTA = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, costo_promocion=? WHERE id_promocion=? ";
-	private static final String SQL_ACTUALIZAR_PORCENTUAL = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, descuento_promocion=? WHERE id_promocion=? ";
-	private static final String SQL_ACTUALIZAR_AXB = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, id_atraccion_premio=? WHERE id_promocion=? ";
+	private static final String SQL_ACTUALIZAR_ABSOLUTA = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, costo_promocion=?, descuento_promocion=null, id_atraccion_premio=null, id_tipo_promocion=2 WHERE id_promocion=? ";
+	private static final String SQL_ACTUALIZAR_PORCENTUAL = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, descuento_promocion=?, costo_promocion=null, id_atraccion_premio=null, id_tipo_promocion=1 WHERE id_promocion=? ";
+	private static final String SQL_ACTUALIZAR_AXB = "UPDATE promociones SET nombre_promocion=?, id_tipo_atraccion=?, descripcion=?, es_valida=?, id_atraccion_premio=?, descuento_promocion=null, costo_promocion=null, id_tipo_promocion=3 WHERE id_promocion=? ";
+	
+	private static final String SQL_AGREGAR_ATRACCIONES_INVOLUCRADAS = "INSERT INTO atracciones_involucradas (id_promocion, id_atraccion) VALUES (?,?); ";
+	private static final String SQL_ELIMINAR_ATRACCIONES_INVOLUCRADAS = "DELETE FROM atracciones_involucradas WHERE id_promocion = ?";
+private static final String SQL_CREAR_ABSOLUTA = "INSERT INTO promociones (nombre_promocion, id_tipo_promocion, id_tipo_atraccion, descripcion, costo_promocion) VALUES (?,2,?,?,?); ";
+private static final String SQL_CREAR_PORCENTUAL = "INSERT INTO promociones (nombre_promocion, id_tipo_promocion, id_tipo_atraccion, descripcion, descuento_promocion) VALUES (?,1,?,?,?);";
+private static final String SQL_CREAR_AXB = "INSERT INTO promociones (nombre_promocion, id_tipo_promocion, id_tipo_atraccion, descripcion, id_atraccion_premio) VALUES (?,3,?,?,?);";
 
+	
+	
 	public List<Promocion> listarPromocionesValidas(Map<Integer, Atraccion> mapDeAtraccionesPorID) {
 		try {
 			Connection conn = ConnectionProvider.getConnection();
@@ -144,6 +152,7 @@ public class PromocionDAOImpl implements iPromocionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
 
 	@Override
 	public int actualizar(Promocion promocion) {
@@ -154,14 +163,14 @@ public class PromocionDAOImpl implements iPromocionDAO {
 
 			if (promocion.getTipoPromocion() == TipoDePromocion.ABSOLUTA) {
 				instruccion = conn.prepareStatement(SQL_ACTUALIZAR_ABSOLUTA);
-				
+
 				instruccion.setDouble(5, promocion.getPremio());
-				
+
 			} else if (promocion.getTipoPromocion() == TipoDePromocion.AXB) {
 				instruccion = conn.prepareStatement(SQL_ACTUALIZAR_AXB);
 
 				instruccion.setInt(5, (int) promocion.getPremio());
-				
+
 			} else if (promocion.getTipoPromocion() == TipoDePromocion.PORCENTUAL) {
 				instruccion = conn.prepareStatement(SQL_ACTUALIZAR_PORCENTUAL);
 
@@ -173,6 +182,96 @@ public class PromocionDAOImpl implements iPromocionDAO {
 			instruccion.setString(3, promocion.getDescripcion());
 			instruccion.setBoolean(4, promocion.esValida());
 			instruccion.setInt(6, promocion.getID());
+
+			return instruccion.executeUpdate();// nos devuelve la cantidad de registros afectados
+		} catch (Exception e) {
+			throw new DatosPerdidos(e);
+		}
+	}
+
+	@Override
+	public int actualizarListaDeAtraccionesInvolucradas(Promocion promocion, Atraccion atraccion) {
+
+		try {
+			Connection conn = null;
+			PreparedStatement instruccion = null;
+			conn = ConnectionProvider.getConnection();
+
+			instruccion = conn.prepareStatement(SQL_AGREGAR_ATRACCIONES_INVOLUCRADAS);
+
+			instruccion.setInt(1, promocion.getID());
+			instruccion.setInt(2, atraccion.getID());
+
+			return instruccion.executeUpdate();// nos devuelve la cantidad de registros afectados
+		} catch (Exception e) {
+			throw new DatosPerdidos(e);
+		}
+	}
+	
+	
+	
+	@Override
+	public Integer obtenerUltimaIDUtilizada() {
+		
+		try {
+			String sql="SELECT seq FROM sqlite_sequence WHERE name='promociones'";
+			Connection conn = null;
+			PreparedStatement instruccion = null;
+			conn = ConnectionProvider.getConnection();
+			instruccion = conn.prepareStatement(sql);
+
+			ResultSet rs = instruccion.executeQuery();
+
+			
+			while(rs.next()) {
+				return rs.getInt("seq");
+			}
+			
+		} catch (Exception e) {
+			throw new DatosPerdidos(e);
+		}
+		return null;
+	}
+	
+	@Override
+	public int borrarListaDeAtraccionesInvolucradas(Promocion promocion) {
+		try {
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(SQL_ELIMINAR_ATRACCIONES_INVOLUCRADAS);
+			statement.setInt(1, promocion.getID());
+			return statement.executeUpdate();
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int insert(Promocion promocion) {
+		try {
+			Connection conn = null;
+			PreparedStatement instruccion = null;
+			conn = ConnectionProvider.getConnection();
+			if (promocion.getTipoPromocion() == TipoDePromocion.ABSOLUTA) {
+				instruccion = conn.prepareStatement(SQL_CREAR_ABSOLUTA);
+
+				instruccion.setDouble(4, promocion.getPremio());
+				System.out.println("Llega");
+			} else if (promocion.getTipoPromocion() == TipoDePromocion.AXB) {
+				instruccion = conn.prepareStatement(SQL_CREAR_AXB);
+
+				instruccion.setInt(4, (int) promocion.getPremio());
+
+			} else if (promocion.getTipoPromocion() == TipoDePromocion.PORCENTUAL) {
+				instruccion = conn.prepareStatement(SQL_CREAR_PORCENTUAL);
+
+				instruccion.setDouble(4, promocion.getPremio());
+			}
+
+			instruccion.setString(1, promocion.getNombre());
+			instruccion.setDouble(2, AtraccionDAOImpl.buscarID(promocion.getTipoAtraccion()));
+			instruccion.setString(3, promocion.getDescripcion());
 
 			return instruccion.executeUpdate();// nos devuelve la cantidad de registros afectados
 		} catch (Exception e) {

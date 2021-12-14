@@ -14,6 +14,8 @@ public class AxB extends Promocion {
 		super(nombre, tipoAtraccion, atracciones, id, descripcion);
 		this.premio = premio; //El premio está contenido en la lista de atracciones
 		//Por lo tanto si es de distinto tipo, será verificado en su padre.
+		
+		this.esValida=true;
 	}
 
 	@Override
