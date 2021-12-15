@@ -26,46 +26,41 @@
 
 	<c:if test="${user.esAdmin()}">
 		<c:forEach items="${promociones}" var="promocion" varStatus="loop">
-		
+
 			<div class="accordion accordion-flush mb-1"
 				id="accordionFlush-${loop.count}">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="flush-heading-${loop.count}">
 						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#flush-collapse-${loop.count}" 
+							data-bs-toggle="collapse"
+							data-bs-target="#flush-collapse-${loop.count}"
 							aria-expanded="false" aria-controls="flush-collapseOne">
 							<c:out value="${promocion.getNombre()}"></c:out>
 						</button>
 					</h2>
-					<div id="flush-collapse-${loop.count}" class="accordion-collapse collapse"
+					<div id="flush-collapse-${loop.count}"
+						class="accordion-collapse collapse"
 						aria-labelledby="flush-heading-${loop.count}"
 						data-bs-parent="#accordionFlush-${loop.count}">
 						<div class="accordion-body">
-							<form action="/TurismoTierraMedia/promociones/edit.do"
+							<form
+								action="/TurismoTierraMedia/promociones/edit.do?id=${promocion.getID()}"
 								method="post">
-
-								<div class="mb-3">
-									<input class="form-control" name="id" placeholder="ID" readonly
-										type="hidden" value="${promocion.getID()}">
-								</div>
 
 								<div class="mb-3">
 									<input class="form-control input-lg" name="nombre"
 										placeholder="Nombre Atraccion"
 										value="${promocion.getNombre()}">
 								</div>
-
 								<div class="mb-3">
 									<textarea class="form-control" id="exampleFormControlTextarea1"
 										name="descripcion" placeholder="Descripcion de la atraccion"
 										required rows="3">${promocion.getDescripcion()}</textarea>
 								</div>
-
 								<div class="mb-3">
-									<label>Tipo de atraccion:</label> <select class="form-select"
+									<label>Tipo de atraccion:</label> <select class="form-select seleccion-tipo-atraccion"
 										aria-label="Default select example" name="tipo-atraccion"
-										required id="seleccion-tipo-atraccion"
-										onclick='aparecerAtraccionesInvolucradas(); ponerAtraccionesEnAXB()'>
+										required onclick='aparecerAtraccionesInvolucradas(${loop.count -1}); ponerAtraccionesEnAXB(${loop.count - 1})'>
 										<option value="AVENTURA"
 											<c:if test="${promocion.getTipoAtraccion().toString().equals('AVENTURA') }">selected</c:if>>AVENTURA</option>
 										<option value="DEGUSTACION"
@@ -83,27 +78,26 @@
 										id="boton-absoluta" onclick="aparecerAbsoluta()">ABSOLUTA</button>
 									<button type="button" class="btn btn-primary"
 										id="boton-porcentual" onclick="aparecerPorcentual()">PORCENTUAL</button>
-										<input name="tipo-promocion"  type="hidden" id="tipo-promocion">
+									<input name="tipo-promocion" type="hidden" id="tipo-promocion">
 								</div>
 
 								<div class="mb-3">
 
 									<select class="form-select" aria-label="Default select example"
 										name="atraccion-premio" id="atraccion-premio">
-									</select>
-									<input class="form-control" id="porcentaje-descuento"
+									</select> <input class="form-control" id="porcentaje-descuento"
 										name="porcentaje-descuento" placeholder="Porcentaje descuento"
-										type="hidden" value="">
-										<input class="form-control" id="precio-absoluto"
-										name="precio-absoluto" placeholder="Precio final"
-										type="hidden" value="">
+										type="hidden" value=""> <input class="form-control"
+										id="precio-absoluto" name="precio-absoluto"
+										placeholder="Precio final" type="hidden" value="">
 								</div>
 
 
 								<div class="mb-3">
 									<label>Atracciones involucradas:</label>
-									<p id="atracciones-validas"></p>
-									<input name="atracciones-involucradas-electas"  type="hidden" id="atracciones-involucradas-electas" value="">
+									<p class="atracciones-validas"></p>
+									<input name="atracciones-involucradas-electas" type="hidden"
+										id="atracciones-involucradas-electas" value="">
 								</div>
 
 
@@ -120,7 +114,7 @@
 			</div>
 		</c:forEach>
 		<c:forEach items="${atracciones}" var="atraccion">
-										<p class="atracciones-involucradas">${atraccion.getNombre()},${atraccion.getTipoAtraccion()}</p>
+			<p class="atracciones-involucradas">${atraccion.getNombre()},${atraccion.getTipoAtraccion()}</p>
 		</c:forEach>
 	</c:if>
 </body>

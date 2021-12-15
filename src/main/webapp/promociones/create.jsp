@@ -30,11 +30,6 @@
 				method="post">
 
 				<div class="mb-3">
-					<input class="form-control" name="id" placeholder="ID" readonly
-						type="hidden" value="">
-				</div>
-
-				<div class="mb-3">
 					<input class="form-control input-lg" name="nombre"
 						placeholder="Nombre Atraccion" value="">
 				</div>
@@ -46,10 +41,9 @@
 				</div>
 
 				<div class="mb-3">
-					<label>Tipo de atraccion:</label> <select class="form-select"
+					<label>Tipo de atraccion:</label> <select class="form-select seleccion-tipo-atraccion"
 						aria-label="Default select example" name="tipo-atraccion" required
-						id="seleccion-tipo-atraccion"
-						onclick='aparecerAtraccionesInvolucradas(); ponerAtraccionesEnAXB()'>
+						onclick='aparecerAtraccionesInvolucradas(0); ponerAtraccionesEnAXB(0)'>
 						<option value="AVENTURA">AVENTURA</option>
 						<option value="DEGUSTACION">DEGUSTACION</option>
 						<option value="PAISAJE">PAISAJE</option>
@@ -80,7 +74,7 @@
 
 				<div class="mb-3">
 					<label>Atracciones involucradas:</label>
-					<p id="atracciones-validas"></p>
+					<p class="atracciones-validas"></p>
 					<c:forEach items="${atracciones}" var="atraccion">
 						<p class="atracciones-involucradas">${atraccion.getNombre()},${atraccion.getTipoAtraccion()}</p>
 					</c:forEach>
