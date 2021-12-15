@@ -55,6 +55,7 @@ public class RegisterServlet extends HttpServlet {
 					horasDisponibles);
 
 			if (!usuario.isNull()) {
+				usuario=registerService.login(username, password);
 				req.getSession().setAttribute("user", usuario);
 	    		resp.sendRedirect("index.jsp");    		
 			} else {

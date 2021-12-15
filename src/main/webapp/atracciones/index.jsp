@@ -55,40 +55,37 @@
 
 
 	<c:forEach items="${atracciones}" var="atraccion">
-		<tr>
-			<div class="box-container">
-				<div class="box">
-					<h3>
-						<c:out value="${atraccion.getNombre()}"></c:out>
-					</h3>
-					<p>
-						<c:out value="${atraccion.getDescripcion()}"></c:out>
-					</p>
-					<img
-						src="../assets/img/atracciones/<c:out value="${atraccion.getNombre()}"></c:out>.jpg"
-						alt="">
-					<p>Costo: "${atraccion.getCosto()}"</p>
-					<p>Duracion: "${atraccion.getDuracion()}"</p>
-					<p>Tipo Atraccion: "${atraccion.getTipoAtraccion()}"</p>
-					<p>Cupos: "${atraccion.getCuposDisponibles()}"</p>
-					<c:choose>
+		<div class="box-container">
+			<div class="box">
+				<h3>
+					<c:out value="${atraccion.getNombre()}"></c:out>
+				</h3>
+				<p>
+					<c:out value="${atraccion.getDescripcion()}"></c:out>
+				</p>
+				<img
+					src="../assets/img/atracciones/<c:out value="${atraccion.getNombre()}"></c:out>.jpg"
+					alt="">
+				<p>Costo: "${atraccion.getCosto()}"</p>
+				<p>Duracion: "${atraccion.getDuracion()}"</p>
+				<p>Tipo Atraccion: "${atraccion.getTipoAtraccion()}"</p>
+				<p>Cupos: "${atraccion.getCuposDisponibles()}"</p>
 
-						<c:when
-							test="${user.puedeComprar(atraccion) && !atraccion.esProductoYaElecto(user)}">
-							<a
-								href="/TurismoTierraMedia/atracciones/buy.do?id=${atraccion.getID()}"><button
-									type="button" class="btn btn-success">COMPRAR</button></a>
-						</c:when>
-						<c:otherwise>
-							<a href="#"><button type="button" class="btn btn-secondary disabled">NO
-									SE PUEDE COMPRAR</button></a>
-						</c:otherwise>
-					</c:choose>
-
-				</div>
+				<c:choose>
+					<c:when
+						test="${user.puedeComprar(atraccion) && !atraccion.esProductoYaElecto(user)}">
+						<a
+							href="/TurismoTierraMedia/atracciones/buy.do?id=${promocion.getID()}"><button
+								type="button" class="btn btn-success">COMPRAR</button></a>
+					</c:when>
+					<c:otherwise>
+						<a href="#"><button type="button"
+								class="btn btn-secondary disabled">NO SE PUEDE COMPRAR</button></a>
+					</c:otherwise>
+				</c:choose>
 
 			</div>
-		</tr>
+		</div>
 
 	</c:forEach>
 

@@ -117,8 +117,13 @@ public abstract class Promocion extends Producto {
 	}
 
 	@Override
-	public String toString() {
-		return "Promocion:" + super.toString();
+	public String toString() { 
+		String fraseFinal="Promocion: " + super.toString() + " Contiene: ";
+		for(Atraccion atraccion: this.atracciones) {
+			fraseFinal+="-"+ atraccion.getNombre() +"\n";
+		}
+		
+		return fraseFinal;
 	}
 
 	public abstract double getPremio();

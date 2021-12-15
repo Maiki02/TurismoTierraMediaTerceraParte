@@ -83,6 +83,7 @@ public class Atraccion extends Producto {
 		if (producto.esPromocion()) {
 			return producto.contiene(this);
 		}
+		
 		return this.equals(producto);
 	}
 	
@@ -110,4 +111,5 @@ public class Atraccion extends Producto {
 		
 	}
 
+	
 }

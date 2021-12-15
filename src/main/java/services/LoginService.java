@@ -1,5 +1,6 @@
 package services;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import model.nullobjects.*;
@@ -17,9 +18,13 @@ public class LoginService {
 	Map<Integer, Atraccion> mapDeAtraccionesPorID;
 	Map<Integer, Promocion> mapDePromocionesPorID;
 	
-	public Usuario login(String username, String password) {
+	public LoginService() {
 		cargarAtraccionesYPromociones();
 		userDao = DAOFactory.getUsuarioDAO();
+	}
+	
+	
+	public Usuario login(String username, String password) {
     	Usuario user = userDao.findByUsername(username, this.mapDeAtraccionesPorID, this.mapDePromocionesPorID);
     	if (user.isNull() || !user.verificarPassword(password)) {
     		user = NullUser.build();
@@ -28,13 +33,13 @@ public class LoginService {
 	}
 	
 	public Usuario register(String username, String password, TipoDeAtraccion tipoFavorito, Double monedasDisponibles, Double horasDisponibles) {
-		iUsuarioDAO userDao = DAOFactory.getUsuarioDAO();
-    	Usuario usuario = userDao.findByUsername(username, null, null);
+    	Usuario usuario = userDao.findByUsername(username, this.mapDeAtraccionesPorID, this.mapDePromocionesPorID);
 		
 		if(usuario.isNull()) {
-			usuario =new Usuario(-1, username, "", monedasDisponibles, horasDisponibles, tipoFavorito, 0.0, 0.0, null, false);
+			//Integer id= userDao.obtenerUltimaIDUtilizada() + 1;
+			usuario =new Usuario(-1, username, "", monedasDisponibles, horasDisponibles, tipoFavorito, 0.0, 0.0, new LinkedList<Producto>(), false);
 			usuario.setPassword(password);
-			DAOFactory.getUsuarioDAO().insert(usuario);
+			userDao.insert(usuario);
 			return usuario;
 		}
 		

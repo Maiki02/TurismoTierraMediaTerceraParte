@@ -4,7 +4,7 @@
 .titulo{
 	color: black;
 	text-decoration: underline;
-	font-size: 70px;
+	font-size: 50px;
 	margin-bottom: 50px;
 	font-weight: bold; 
 }
@@ -12,7 +12,7 @@
 
 p{
 	color: black;
-	font-size: 50px;
+	font-size: 10px;
 	margin-bottom: 30px;
 	margin-right: 20px;
 	font-weight: bold; 
@@ -25,7 +25,7 @@ h4{
 	margin-left: 2px;
 	color: 	#8b0000;
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 10px;
 	display: inline-block;
 	
 }

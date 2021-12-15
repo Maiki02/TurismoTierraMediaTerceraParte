@@ -17,12 +17,10 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			+ "FROM usuarios "
 			+ "LEFT JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = usuarios.id_tipo_atraccion_favorito ";
 	private static final String VALIDAS = "WHERE es_valido=1 ";
-	private static final String INVALIDAS= "WHERE es_valido=0 ";
-	
+	private static final String INVALIDAS = "WHERE es_valido=0 ";
+
 	private static final String SQL_ACTUALIZAR = "UPDATE usuarios SET tiempo_usuario = ?, monedas_usuario= ?, total_a_pagar= ?, total_horas_gastadas= ? WHERE id_usuario = ?";
 
-	
-	
 	public List<Usuario> listarUsuarios(Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) {
 		try {
@@ -38,7 +36,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 
 			while (rs.next()) {
 				try {
-					usuario=toUser(rs, mapDeAtraccionesPorID, mapDePromocionesPorID);
+					usuario = toUser(rs, mapDeAtraccionesPorID, mapDePromocionesPorID);
 					usuarios.add(usuario);
 				} catch (ValorNegativo ne) {
 					System.err.println(ne.getMessage());
@@ -88,12 +86,12 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 		}
 	}
 
-	
 	@Override
 	public int actualizarContraseña(Usuario usuario) {
 		try {
 			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement instruccion = conn.prepareStatement("UPDATE usuarios SET password = ? WHERE id_usuario = ?;");
+			PreparedStatement instruccion = conn
+					.prepareStatement("UPDATE usuarios SET password = ? WHERE id_usuario = ?;");
 			instruccion.setString(1, usuario.getPassword());
 			instruccion.setInt(2, usuario.getID());
 			return instruccion.executeUpdate();
@@ -101,7 +99,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			throw new DatosPerdidos(e);
 		}
 	}
-	
+
 	@Override
 	public int insert(Usuario usuario) {
 		try {
@@ -120,8 +118,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
-	
+
 	@Override
 	public int actualizar(Usuario usuario) {
 		try {
@@ -138,7 +135,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			throw new DatosPerdidos(e);
 		}
 	}
-	
+
 	@Override
 	public Usuario find(Integer id, Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) {
@@ -148,7 +145,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 					+ "LEFT JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = usuarios.id_tipo_atraccion_favorito "
 					+ "WHERE id_usuario = ? and es_valido = 1 ";
 			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql );
+			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id);
 			ResultSet resultados = statement.executeQuery();
 
@@ -164,18 +161,17 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 		}
 	}
 
-/*	private static void actualizarProductosComprados(Usuario usuario) {
-		try {
-			List<Producto> productosComprados = usuario.getProductosComprados();
-			Connection conn = ConexionBDD.getConexion();
-			String sql = "INSERT INTO compra_del_usuario (id_usuario, id_promocion_comprada, id_atraccion_comprada) VALUES (?, ?, ?);";
-
-		} catch (Exception e) {
-			throw new DatosPerdidos(e);
-		}
-
-	}
-	*/
+	/*
+	 * private static void actualizarProductosComprados(Usuario usuario) { try {
+	 * List<Producto> productosComprados = usuario.getProductosComprados();
+	 * Connection conn = ConexionBDD.getConexion(); String sql =
+	 * "INSERT INTO compra_del_usuario (id_usuario, id_promocion_comprada, id_atraccion_comprada) VALUES (?, ?, ?);"
+	 * ;
+	 * 
+	 * } catch (Exception e) { throw new DatosPerdidos(e); }
+	 * 
+	 * }
+	 */
 	public Usuario findByUsername(String username, Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) {
 		try {
@@ -199,13 +195,13 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	private Usuario toUser(ResultSet rs, Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) throws SQLException {
 		int idUsuario = rs.getInt("id_usuario");
 		String nombre = rs.getString("nombre_usuario");
 		String password = rs.getString("password");
-		boolean esAdmin= rs.getInt("es_admin") == 1;
+		boolean esAdmin = rs.getInt("es_admin") == 1;
 		Double monedasDisponibles = rs.getDouble("monedas_usuario");
 		Double horasDisponibles = rs.getDouble("tiempo_usuario");
 		TipoDeAtraccion tipoFavorito = TipoDeAtraccion.valueOf(rs.getString("tipo_atraccion"));
@@ -213,19 +209,19 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 		double totalHorasGastadas = rs.getDouble("total_horas_gastadas");
 
 		List<Producto> productosComprados = buscarProductosComprados(idUsuario, mapDeAtraccionesPorID,
-		mapDePromocionesPorID);
+				mapDePromocionesPorID);
 
-		return new Usuario(idUsuario, nombre, password, monedasDisponibles, horasDisponibles, tipoFavorito,
-				totalAPagar, totalHorasGastadas, productosComprados, esAdmin);
+		return new Usuario(idUsuario, nombre, password, monedasDisponibles, horasDisponibles, tipoFavorito, totalAPagar,
+				totalHorasGastadas, productosComprados, esAdmin);
 	}
 
 	@Override
 	public int agregarProductoAlItinerario(Integer id, Producto producto) {
 		String sql;
-		if(producto.esPromocion()) {
-			sql="INSERT INTO compra_del_usuario (id_usuario, id_promocion_comprada) VALUES (?,?)";
+		if (producto.esPromocion()) {
+			sql = "INSERT INTO compra_del_usuario (id_usuario, id_promocion_comprada) VALUES (?,?)";
 		} else {
-			sql="INSERT INTO compra_del_usuario (id_usuario, id_atraccion_comprada) VALUES (?,?)";
+			sql = "INSERT INTO compra_del_usuario (id_usuario, id_atraccion_comprada) VALUES (?,?)";
 		}
 		try {
 			Connection conn = ConnectionProvider.getConnection();
@@ -237,6 +233,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-		
+
 	}
+
 }

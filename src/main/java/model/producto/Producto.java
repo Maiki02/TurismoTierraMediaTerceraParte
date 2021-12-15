@@ -106,7 +106,7 @@ public abstract class Producto {
 
 	@Override
 	public String toString() {
-		return nombre + " Tipo:" + this.tipoAtraccion + " Precio:" + getCosto() + " Horas:" + getDuracion();
+		return nombre + " Tipo: " + this.tipoAtraccion + " Precio: " + getCosto() + " Horas: " + getDuracion();
 	}
 
 	public abstract boolean contiene(Producto producto);

@@ -98,7 +98,11 @@ function registrarAtraccionElecta() {
 	atraccionesInvolucradasElectas.value = salidaFinal;
 }
 
+function mostrarTodo(){
+	let atracciones=0;
+}
 
+mostrarTodo();
 aparecerAtraccionesInvolucradas();
 atraccionPremio.style.visibility = "hidden";
 atraccionPremio.style.display = "none";

@@ -42,8 +42,7 @@
 					onclick = "location='/TurismoTierraMedia/invitado'"/>
 				</div>
 			</form>
-			
-			<div id="clima" class="d-grid gap-2"><p>Acá puede ir el clima</p></div>
+		
 		</main>
 	</div>
 </body>

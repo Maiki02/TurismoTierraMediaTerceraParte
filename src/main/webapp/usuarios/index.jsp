@@ -6,6 +6,7 @@
 <head>
 <jsp:include page="../partials/head.jsp"></jsp:include>
 <link href="../assets/stylesheets/base.css" rel="stylesheet" />
+<link href="../assets/stylesheets/tabla.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -22,6 +23,7 @@
 						<th scope="col">Tipo Favorito</th>
 						<th scope="col">Total a pagar</th>
 						<th scope="col">Total de horas</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>

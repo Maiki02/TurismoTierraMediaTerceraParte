@@ -17,7 +17,7 @@ public class PromocionDAOImpl implements iPromocionDAO {
 			+ "LEFT JOIN atracciones ON atracciones.id_atraccion = promociones.id_atraccion_premio "
 			+ "LEFT JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = promociones.id_tipo_atraccion "
 			+ "WHERE promociones.es_valida=1 ";
-	private static final String SQL_FIND_ID = "SELECT id_promocion, nombre_promocion, tipo_promocion , tipo_atraccion, costo_promocion, promociones.descripcion "
+	private static final String SQL_FIND_ID = "SELECT id_promocion, nombre_promocion, tipo_promocion , tipo_atraccion, costo_promocion, descuento_promocion, id_Atraccion_premio, promociones.descripcion "
 			+ "FROM promociones "
 			+ "LEFT JOIN tipo_atraccion ON tipo_atraccion.id_tipo_atraccion = promociones.id_tipo_atraccion "
 			+ "LEFT JOIN atracciones ON atracciones.id_atraccion = promociones.id_atraccion_premio "

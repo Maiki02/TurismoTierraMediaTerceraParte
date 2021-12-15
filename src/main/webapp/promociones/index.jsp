@@ -56,7 +56,6 @@
 
 
 	<c:forEach items="${promociones}" var="promocion">
-		<tr>
 			<div class="box-container">
 				<div class="box">
 					<h3>
@@ -66,7 +65,7 @@
 						<c:out value="${promocion.getDescripcion()}"></c:out>
 					</p>
 					<img
-						src="../assets/img/promociones/<c:out value="${promocion.getID()}"></c:out>.jpg"
+						src="../assets/img/promociones/<c:out value="${promocion.getTipoAtraccion()}"></c:out>.jpg"
 						alt="">
 					<p>
 						Costo:
@@ -88,9 +87,7 @@
 					</p>
 					
 					<c:choose>
-
-						<c:when
-							test="${user.puedeComprar(promocion) && !promocion.esProductoYaElecto(user)}">
+						<c:when test="${user.puedeComprar(promocion) && !promocion.esProductoYaElecto(user)}">
 							<a
 								href="/TurismoTierraMedia/promociones/buy.do?id=${promocion.getID()}"><button
 									type="button" class="btn btn-success">COMPRAR</button></a>
@@ -104,7 +101,6 @@
 				</div>
 
 			</div>
-		</tr>
 
 	</c:forEach>
 

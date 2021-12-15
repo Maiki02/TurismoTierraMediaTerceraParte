@@ -7,6 +7,20 @@
 <jsp:include page="partials/head.jsp"></jsp:include>
 <link href="assets/stylesheets/base.css" rel="stylesheet" />
 <link href="assets/stylesheets/inicio.css" rel="stylesheet" />
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+
+
 </head>
 <body>
 
@@ -30,7 +44,7 @@
 				</div>
 
 
-				<div class="slider-atracciones" href="atracciones.index">
+				<div class="slider-atracciones">
 					<div class="container-fluid">
 						<div id="carouselExampleIndicators" class="carousel slide"
 							data-ride="carousel">
@@ -80,6 +94,7 @@
 <a href="/TurismoTierraMedia/atracciones/index.do">
 				<button type="button" class="btn btn-success" id="boton-atracciones">Saber más</button>
 </a>
+</div>
 
 				<div class="promociones">
 					<h4>Visitanos con toda tu familia o tu grupo de amigos con
@@ -93,21 +108,9 @@
 				</div>
 				<a href="/TurismoTierraMedia/promociones/index.do">
 				<button type="button" class="btn btn-success">Saber más</button></a>
+				</div>
 	</main>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+
+
 </html>
