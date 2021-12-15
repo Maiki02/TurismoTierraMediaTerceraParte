@@ -32,20 +32,6 @@ public class UserService {
 		return usuarioDAO.listarUsuarios(mapDeAtraccionesPorID, mapDePromocionesPorID);
 	}
 
-	public Usuario create(String nombre, Integer costo, Double duracion, Integer capacidad) {
-			return null;
-
-	}
-
-	public Usuario update() {
-		return null;
-	
-	}
-
-	public void delete(Integer id) {
-		
-	}
-
 	public Usuario find(Integer id) {
 		Usuario user=usuarioDAO.find(id, this.mapDeAtraccionesPorID, this.mapDePromocionesPorID);
 		

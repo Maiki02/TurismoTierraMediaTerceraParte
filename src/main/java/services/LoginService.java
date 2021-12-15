@@ -27,6 +27,20 @@ public class LoginService {
     	return user;
 	}
 	
+	public Usuario register(String username, String password, TipoDeAtraccion tipoFavorito, Double monedasDisponibles, Double horasDisponibles) {
+		iUsuarioDAO userDao = DAOFactory.getUsuarioDAO();
+    	Usuario usuario = userDao.findByUsername(username, null, null);
+		
+		if(usuario.isNull()) {
+			usuario =new Usuario(-1, username, "", monedasDisponibles, horasDisponibles, tipoFavorito, 0.0, 0.0, null, false);
+			usuario.setPassword(password);
+			DAOFactory.getUsuarioDAO().insert(usuario);
+			return usuario;
+		}
+		
+		return NullUser.build();
+	}
+	
 	private void cargarAtraccionesYPromociones() {
 		promocionDAO = DAOFactory.getPromocionDAO();
 		atraccionDAO = DAOFactory.getAtraccionDAO();

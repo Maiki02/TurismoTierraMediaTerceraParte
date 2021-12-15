@@ -21,6 +21,8 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 	
 	private static final String SQL_ACTUALIZAR = "UPDATE usuarios SET tiempo_usuario = ?, monedas_usuario= ?, total_a_pagar= ?, total_horas_gastadas= ? WHERE id_usuario = ?";
 
+	
+	
 	public List<Usuario> listarUsuarios(Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) {
 		try {
@@ -215,5 +217,26 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 
 		return new Usuario(idUsuario, nombre, password, monedasDisponibles, horasDisponibles, tipoFavorito,
 				totalAPagar, totalHorasGastadas, productosComprados, esAdmin);
+	}
+
+	@Override
+	public int agregarProductoAlItinerario(Integer id, Producto producto) {
+		String sql;
+		if(producto.esPromocion()) {
+			sql="INSERT INTO compra_del_usuario (id_usuario, id_promocion_comprada) VALUES (?,?)";
+		} else {
+			sql="INSERT INTO compra_del_usuario (id_usuario, id_atraccion_comprada) VALUES (?,?)";
+		}
+		try {
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			statement.setInt(2, producto.getID());
+
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+		
 	}
 }

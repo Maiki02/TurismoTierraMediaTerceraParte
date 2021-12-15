@@ -19,4 +19,5 @@ public interface iUsuarioDAO  {
 	
 	public Usuario findByUsername(String username, Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID);
+	public int agregarProductoAlItinerario(Integer id, Producto producto);
 }

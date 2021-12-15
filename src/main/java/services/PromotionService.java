@@ -1,18 +1,20 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import model.producto.*;
-import persistence.iAtraccionDAO;
-import persistence.iPromocionDAO;
+import model.usuario.Usuario;
+import persistence.*;
 import persistence.commons.DAOFactory;
 
 public class PromotionService {
 	private iAtraccionDAO atraccionDAO;
 	private iPromocionDAO promocionDAO;
+	private iUsuarioDAO usuarioDAO;
 	Map<Integer, Atraccion> mapDeAtraccionesPorID;
 
 	public PromotionService() {
@@ -104,6 +106,38 @@ public class PromotionService {
 	public Integer establecerID() {
 		return promocionDAO.obtenerUltimaIDUtilizada() + 1;
 		
+	}
+
+	public Map<String, String> buy(Usuario usuario, Integer promocionID) {
+		Map<String, String> errors = new HashMap<String, String>();
+		usuarioDAO = DAOFactory.getUsuarioDAO();
+
+		Promocion promocion = promocionDAO.find(promocionID, mapDeAtraccionesPorID);
+
+		if (!promocion.quedanCuposDisponibles()) {
+			errors.put("atraccion", "No hay cupo disponible");
+		}
+		if (!usuario.leAlcanzanLasMonedas(promocion)) {
+			errors.put("user", "No tienes dinero suficiente");
+		}
+		if (!usuario.leAlcanzanLasHoras(promocion)) {
+			errors.put("user", "No tienes tiempo suficiente");
+		}
+
+		if (errors.isEmpty()) {
+			usuario.comprarProducto(promocion); // Compramos el producto
+
+			for(Atraccion atraccion: promocion.getAtracciones()) {
+				atraccionDAO.actualizar(atraccion); // Actualizamos los cupos de las atracciones
+			}
+
+			usuarioDAO.actualizar(usuario); // Actualizamos la base de datos, restandole monedas y sumandoselo a total a pagar
+
+			usuarioDAO.agregarProductoAlItinerario(usuario.getID(), promocion); //agregamos el producto al itinerario
+
+		}
+
+		return errors;
 	}
 
 }

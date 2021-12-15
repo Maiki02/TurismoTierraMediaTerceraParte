@@ -48,9 +48,9 @@ public class EditPromotionServlet extends HttpServlet {
 			
 			resp.sendRedirect("/TurismoTierraMedia/promociones/index.do");
 		} catch (Exception e) {
-			req.setAttribute("flash", "Se ha presentado un error");
+			req.setAttribute("flash", "Se ha presentado un error, cargaste mal un dato");
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/TurismoTierraMedia/promociones/edit.jsp");
+					.getRequestDispatcher("/promociones/edit.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

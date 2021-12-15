@@ -40,13 +40,13 @@ public class CreatePromotionServlet extends HttpServlet {
 		try {
 			Integer id=promotionService.establecerID(); //Insertamos con id negativa, despues se va a cambiar
 			Promocion promocion= promotionService.crearPromocion(req, id);
-			System.out.println("Por insertar en la base de datos");
 			promotionService.create(promocion);
 			resp.sendRedirect("/TurismoTierraMedia/promociones/index.do");
 		} catch (Exception e) {
-			req.setAttribute("flash", "Se ha presentado un error");
+			req.setAttribute("flash", "Cargaste mal un dato");
+
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/TurismoTierraMedia/promociones/index.jsp");
+					.getRequestDispatcher("/promociones/create.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

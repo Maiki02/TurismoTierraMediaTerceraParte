@@ -34,13 +34,15 @@
 	<c:if test="${user.esAdmin()}">
 		<div id="botones">
 			<div class="mb-3">
-				<a href="/TurismoTierraMedia/promociones/create.do" class="btn btn-primary" role="button"> <i
-					class="bi bi-plus-lg"></i> Nueva Promocion
+				<a href="/TurismoTierraMedia/promociones/create.do"
+					class="btn btn-primary" role="button"> <i class="bi bi-plus-lg"></i>
+					Nueva Promocion
 				</a>
 			</div>
 			<div class="mb-3">
-				<a href="/TurismoTierraMedia/promociones/edit.do" class="btn btn-success" role="button"> <i
-					class="bi bi-plus-lg"></i> Editar Promocion
+				<a href="/TurismoTierraMedia/promociones/edit.do"
+					class="btn btn-success" role="button"> <i class="bi bi-plus-lg"></i>
+					Editar Promocion
 				</a>
 			</div>
 			<div class="mb-3">
@@ -64,8 +66,8 @@
 						<c:out value="${promocion.getDescripcion()}"></c:out>
 					</p>
 					<img
-						src="../assets/img/<c:out value="${promocion.getID()}"></c:out>.jpeg"
-						alt=""> <br>
+						src="../assets/img/promociones/<c:out value="${promocion.getID()}"></c:out>.jpg"
+						alt="">
 					<p>
 						Costo:
 						<c:out value="${promocion.getCosto()}" />
@@ -84,7 +86,21 @@
 							<c:out value="${atraccion.getNombre()}. " />
 						</c:forEach>
 					</p>
-					<button type="button" class="btn btn-success">COMPRAR</button>
+					
+					<c:choose>
+
+						<c:when
+							test="${user.puedeComprar(promocion) && !promocion.esProductoYaElecto(user)}">
+							<a
+								href="/TurismoTierraMedia/promociones/buy.do?id=${promocion.getID()}"><button
+									type="button" class="btn btn-success">COMPRAR</button></a>
+						</c:when>
+						<c:otherwise>
+							<a href="#"><button type="button"
+									class="btn btn-secondary disabled">NO SE PUEDE COMPRAR</button></a>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 
 			</div>

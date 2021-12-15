@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body {
+	background-color: #632432;
+	font-family: Arial;
+}
+
+#container {
+	width: 600px;
+		
+}
+
+table{
+	margin-top: 20px;
+	width: 100%;
+	background-color: white;
+	text-align: left;
+    border-collapse: collapse;
+}
+
+th,td {
+	border: solid 1px black;
+	padding: 20px;
+	
+}
+
+thead {
+	background-color: #246355;
+	color: white;
+	border-bottom: solid 5px #0F362D;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover{
+	background-color: #369681;
+	color: white;
+}

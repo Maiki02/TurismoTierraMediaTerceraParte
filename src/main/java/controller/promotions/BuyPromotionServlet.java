@@ -1,4 +1,4 @@
-package controller.attractions;
+package controller.promotions;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,12 +16,13 @@ import persistence.iAtraccionDAO;
 import persistence.commons.DAOFactory;
 import services.AttractionService;
 import services.BuyAttractionService;
+import services.PromotionService;
 
-@WebServlet("/atracciones/buy.do")
-public class BuyAttractionServlet extends HttpServlet {
+@WebServlet("/promociones/buy.do")
+public class BuyPromotionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 3455721046062278592L;
-	private AttractionService attractionService;
+	private PromotionService promotionService;
 
 	Map<Integer, Atraccion> mapDeAtraccionesPorID;
 	Map<Integer, Promocion> mapDePromocionesPorID;
@@ -29,18 +30,17 @@ public class BuyAttractionServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.attractionService = new AttractionService();
+		this.promotionService = new PromotionService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Integer attractionId = Integer.parseInt(req.getParameter("id"));
+		Integer promocionID = Integer.parseInt(req.getParameter("id"));
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
-		Map<String, String> errors = attractionService.buy(user, attractionId);
+		Map<String, String> errors = promotionService.buy(user, promocionID);
 		
 		req.getSession().setAttribute("user", user);
-		
 		
 		if (errors.isEmpty()) {
 			req.setAttribute("flash", "¡Gracias por comprar!");
@@ -50,7 +50,7 @@ public class BuyAttractionServlet extends HttpServlet {
 		}
 
 		RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/atracciones/index.do");
+				.getRequestDispatcher("/promociones/index.do");
 		dispatcher.forward(req, resp);
 	}
 }

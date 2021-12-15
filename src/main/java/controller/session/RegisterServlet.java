@@ -10,17 +10,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.producto.TipoDeAtraccion;
 import model.usuario.Usuario;
 import services.LoginService;
-import services.RegisterService;
 
 @WebServlet("/registrarse")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 8308079314140233763L;
-	private RegisterService registerService;
+	private LoginService registerService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		registerService = new RegisterService();
+		registerService = new LoginService();
 	}
 
 	@Override
@@ -48,22 +47,22 @@ public class RegisterServlet extends HttpServlet {
 		
 		
 		if(!mensajeDeError.equals("")) {
-			req.getSession().setAttribute("flash", mensajeDeError);
+			req.getSession().setAttribute("flashRegister", mensajeDeError);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registro.jsp");
 			dispatcher.forward(req, resp);
-		}
-		Usuario usuario = registerService.register(username, password, atraccionFavorita, monedasDisponibles,
-				horasDisponibles);
-
-		if (!usuario.isNull()) {
-    		req.getSession().setAttribute("user", usuario.getNombre());
-    		req.getSession().setAttribute("monedas", usuario.getMonedasDisponibles());
-    		req.getSession().setAttribute("horas", usuario.getHorasDisponibles());
-			resp.sendRedirect("index.jsp");
 		} else {
-			req.setAttribute("flash", "Nombre de usuario ya registrado.");
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registro.jsp");
-			dispatcher.forward(req, resp);
+			Usuario usuario = registerService.register(username, password, atraccionFavorita, monedasDisponibles,
+					horasDisponibles);
+
+			if (!usuario.isNull()) {
+				req.getSession().setAttribute("user", usuario);
+	    		resp.sendRedirect("index.jsp");    		
+			} else {
+				req.setAttribute("flashRegister", "Nombre de usuario ya registrado.");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registro.jsp");
+				dispatcher.forward(req, resp);
+			}
 		}
+		
 	}
 }

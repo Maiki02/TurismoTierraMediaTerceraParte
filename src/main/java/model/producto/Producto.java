@@ -1,6 +1,7 @@
 package model.producto;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import excepciones.ValorNegativo;
 import model.usuario.Usuario;
@@ -125,6 +126,23 @@ public abstract class Producto {
 
 	public void setEsValida(boolean esValida) {
 		this.esValida = esValida;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		return id == other.id && Objects.equals(nombre, other.nombre);
 	}
 
 }

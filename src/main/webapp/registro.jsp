@@ -16,10 +16,10 @@
 			<h1 class="titulo">Registrarse en Turismo en la Tierra Media</h1>
 
 
-			<c:if test="${flash != null}">
+			<c:if test="${flashRegister != null}">
 				<div class="alert alert-danger">
 					<p>
-						<c:out value="${flash}" />
+						<c:out value="${flashRegister}" />
 					</p>
 				</div>
 			</c:if>
