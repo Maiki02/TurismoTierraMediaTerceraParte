@@ -91,24 +91,25 @@
 
 
 				</div>
-<a href="/TurismoTierraMedia/atracciones/index.do">
-				<button type="button" class="btn btn-success" id="boton-atracciones">Saber más</button>
-</a>
-</div>
-
-				<div class="promociones">
-					<h4>Visitanos con toda tu familia o tu grupo de amigos con
-						nuestros increibles paquetes de viajes y promociones.</h4>
+				<a href="/TurismoTierraMedia/atracciones/index.do">
+					<button type="button" class="btn btn-success"
+						id="boton-atracciones">Saber más</button>
+				</a>
 
 
+			<div class="promociones">
+				<h4>Visitanos con toda tu familia o tu grupo de amigos con
+					nuestros increibles paquetes de viajes y promociones.</h4>
 
-					<img src="assets/img/montaña rusa.jpg" alt="">
 
 
-				</div>
-				<a href="/TurismoTierraMedia/promociones/index.do">
-				<button type="button" class="btn btn-success">Saber más</button></a>
-				</div>
+				<img src="assets/img/montaña rusa.jpg" alt="">
+
+
+			</div>
+			<a href="/TurismoTierraMedia/promociones/index.do">
+				<button type="button" class="btn btn-success">Saber más</button>
+			</a>
 	</main>
 </body>
 
