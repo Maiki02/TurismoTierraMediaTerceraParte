@@ -63,9 +63,8 @@
 				<p>
 					<c:out value="${atraccion.getDescripcion()}"></c:out>
 				</p>
-				<img
-					src="../assets/img/atracciones/<c:out value="${atraccion.getNombre()}"></c:out>.jpg"
-					alt="">
+				<img onerror="this.src='../assets/img/atracciones/Default.jpg';"
+					src="../assets/img/atracciones/${atraccion.getNombre()}.jpg">
 				<p>Costo: "${atraccion.getCosto()}"</p>
 				<p>Duracion: "${atraccion.getDuracion()}"</p>
 				<p>Tipo Atraccion: "${atraccion.getTipoAtraccion()}"</p>
@@ -75,7 +74,7 @@
 					<c:when
 						test="${user.puedeComprar(atraccion) && !atraccion.esProductoYaElecto(user)}">
 						<a
-							href="/TurismoTierraMedia/atracciones/buy.do?id=${promocion.getID()}"><button
+							href="/TurismoTierraMedia/atracciones/buy.do?id=${atraccion.getID()}"><button
 								type="button" class="btn btn-success">COMPRAR</button></a>
 					</c:when>
 					<c:otherwise>
