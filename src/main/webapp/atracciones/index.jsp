@@ -74,7 +74,7 @@
 						d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
   <path
 						d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
-</svg></p> <h4>"${atraccion.getCosto()}"</h4>
+</svg></p> <h4>${atraccion.getCosto()}</h4>
 <br>
 				<p>Duracion :<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
 					class="bi bi-smartwatch" viewBox="0 0 16 16">
@@ -82,9 +82,9 @@
 						d="M9 5a.5.5 0 0 0-1 0v3H6a.5.5 0 0 0 0 1h2.5a.5.5 0 0 0 .5-.5V5z" />
   <path
 						d="M4 1.667v.383A2.5 2.5 0 0 0 2 4.5v7a2.5 2.5 0 0 0 2 2.45v.383C4 15.253 4.746 16 5.667 16h4.666c.92 0 1.667-.746 1.667-1.667v-.383a2.5 2.5 0 0 0 2-2.45V8h.5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H14v-.5a2.5 2.5 0 0 0-2-2.45v-.383C12 .747 11.254 0 10.333 0H5.667C4.747 0 4 .746 4 1.667zM4.5 3h7A1.5 1.5 0 0 1 13 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 11.5v-7A1.5 1.5 0 0 1 4.5 3z" />
-</svg></p> <h4>"${atraccion.getDuracion()}"</h4>
+</svg></p> <h4>${atraccion.getDuracion()}</h4>
 <br>
-				<p>Tipo Atraccion:</p><h4>  "${atraccion.getTipoAtraccion()}"</h4> <br>
+				<p>Tipo Atraccion:</p><h4>${atraccion.getTipoAtraccion()}</h4> <br>
 				<p>Cupos:<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" class="bi bi-people-fill" viewBox="0 0 16 16">
   <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
   <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>

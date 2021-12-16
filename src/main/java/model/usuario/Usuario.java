@@ -17,39 +17,62 @@ public class Usuario {
 	private boolean esAdmin;
 	private boolean esValido;
 
-	
-	
-	public Usuario(int idUsuario, String nombre, String password, double monedasDisponibles, double horasDisponibles, 
-			TipoDeAtraccion tipoFavorito, double totalAPagar, double totalHorasGastadas, List<Producto> productosComprados, boolean esAdmin) {
+	public Usuario(int idUsuario, String nombre, String password, double monedasDisponibles, double horasDisponibles,
+			TipoDeAtraccion tipoFavorito, double totalAPagar, double totalHorasGastadas,
+			List<Producto> productosComprados, boolean esAdmin) {
 		this.id = idUsuario;
 		this.nombre = nombre;
-		this.password=password;
+		this.password = password;
 		setHorasDisponibles(horasDisponibles);
 		setMonedasDisponibles(monedasDisponibles);
 		this.tipoFavorito = tipoFavorito;
-		this.totalAPagar=totalAPagar;
-		this.totalHorasGastadas= totalHorasGastadas;
+		this.totalAPagar = totalAPagar;
+		this.totalHorasGastadas = totalHorasGastadas;
 		this.productosComprados = productosComprados;
-		this.esAdmin=esAdmin;
+		this.esAdmin = esAdmin;
 	}
-	
 
 	// Setters:
-	private void setMonedasDisponibles(double presupuesto) throws ValorNegativo {
+	public void setMonedasDisponibles(double presupuesto) throws ValorNegativo {
 		ValorNegativo.verificarValor(presupuesto);
 		this.monedasDisponibles = presupuesto;
 
 	}
 
-	private void setHorasDisponibles(double horasDisponibles) throws ValorNegativo {
+	public void setHorasDisponibles(double horasDisponibles) throws ValorNegativo {
 
 		ValorNegativo.verificarValor(horasDisponibles);
 		this.horasDisponibles = horasDisponibles;
 	}
- 
+
 	public void setPassword(String password) {
 		this.password = Crypt.hash(password);
 	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getTotalHorasGastadas() {
+		return totalHorasGastadas;
+	}
+
+	public void setTotalHorasGastadas(double totalHorasGastadas) {
+		this.totalHorasGastadas = totalHorasGastadas;
+	}
+
+	public void setEsAdmin(boolean esAdmin) {
+		this.esAdmin = esAdmin;
+	}
+
+	public void setTipoFavorito(TipoDeAtraccion tipoFavorito) {
+		this.tipoFavorito = tipoFavorito;
+	}
+
+	public void setTotalAPagar(double totalAPagar) {
+		this.totalAPagar = totalAPagar;
+	}
+
 	// Getters:
 	public double getHorasDisponibles() {
 		return horasDisponibles;
@@ -82,7 +105,7 @@ public class Usuario {
 	public int getID() {
 		return this.id;
 	}
-	
+
 	public String getPassword() {
 		return this.password;
 	}
@@ -150,33 +173,30 @@ public class Usuario {
 			producto.ocuparAtraccion();
 		}
 	}
-	
-	
+
 	public boolean verificarPassword(String password) {
 		// this.password en realidad es el hash del password
-		//return true;
+		// return true;
 		return Crypt.match(password, this.password);
 	}
-	
+
 	public boolean isNull() {
 		return false;
 	}
- 
+
 	public boolean esAdmin() {
 		return this.esAdmin;
 	}
-	
 
 	@Override
 	public String toString() {
-		return "Usuario: " + nombre + " Tipo favorito: " + this.tipoFavorito + "\n Monedas: " + this.monedasDisponibles + " Horas: " + this.horasDisponibles;
+		return "Usuario: " + nombre + " Tipo favorito: " + this.tipoFavorito + "\n Monedas: " + this.monedasDisponibles
+				+ " Horas: " + this.horasDisponibles;
 	}
-
 
 	public boolean esValido() {
 		return esValido;
 	}
-
 
 	public void setEsValido(boolean esValido) {
 		this.esValido = esValido;

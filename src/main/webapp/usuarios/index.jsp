@@ -36,13 +36,18 @@
 							<td>${usuario.getTipoFavorito() }</td>
 							<td>${usuario.getTotalAPagar() }</td>
 							<td>${usuario.getHorasGastadas() }</td>
-							<td>	
+							<td>
 								<div>
-								<form action="/TurismoTierraMedia/usuarios/info.do" method="post">
-										<input class="form-control" name="id" placeholder="ID"
-											readonly hidden value="${usuario.getID()}">
-										<button type="submit" class="btn btn-warning">Ver más información</button>
-								</form>
+									<a href="/TurismoTierraMedia/usuarios/perfil.do?id=${usuario.getID()}"><button
+											type="submit" class="btn btn-warning">INFO</button> </a>
+								</div>
+								<div>
+									<a href="/TurismoTierraMedia/usuarios/delete.do?id=${usuario.getID() }"><button
+											type="submit" class="btn btn-danger">ELIMINAR</button> </a>
+								</div>
+								<div>
+									<a href="/TurismoTierraMedia/usuarios/edit.do?id=${usuario.getID() }"><button
+											type="submit" class="btn btn-success">EDITAR</button> </a>
 								</div>
 							</td>
 						</tr>

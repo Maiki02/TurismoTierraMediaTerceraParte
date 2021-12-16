@@ -42,7 +42,6 @@ public class InfoUserServlet extends HttpServlet implements Servlet {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 
 		Usuario usuario = userService.find(id);
-
 		if (!usuario.isNull()) {
 			req.setAttribute("usuario", usuario);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/usuarios/perfil.jsp");

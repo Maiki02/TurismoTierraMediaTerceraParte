@@ -19,7 +19,7 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 	private static final String VALIDAS = "WHERE es_valido=1 ";
 	private static final String INVALIDAS = "WHERE es_valido=0 ";
 
-	private static final String SQL_ACTUALIZAR = "UPDATE usuarios SET tiempo_usuario = ?, monedas_usuario= ?, total_a_pagar= ?, total_horas_gastadas= ? WHERE id_usuario = ?";
+	private static final String SQL_ACTUALIZAR = "UPDATE usuarios SET tiempo_usuario = ?, monedas_usuario= ?, total_a_pagar= ?, total_horas_gastadas= ?, es_valido=?, es_admin=?, id_tipo_atraccion_favorito=? WHERE id_usuario = ?";
 
 	public List<Usuario> listarUsuarios(Map<Integer, Atraccion> mapDeAtraccionesPorID,
 			Map<Integer, Promocion> mapDePromocionesPorID) {
@@ -128,7 +128,10 @@ public class UsuarioDAOImpl implements iUsuarioDAO {
 			instruccion.setDouble(2, usuario.getMonedasDisponibles());
 			instruccion.setDouble(3, usuario.getTotalAPagar());
 			instruccion.setDouble(4, usuario.getHorasGastadas());
-			instruccion.setDouble(5, usuario.getID());
+			instruccion.setBoolean(5, usuario.esValido());
+			instruccion.setBoolean(6, usuario.esAdmin());
+			instruccion.setInt(7, AtraccionDAOImpl.buscarID(usuario.getTipoFavorito()));
+			instruccion.setDouble(8, usuario.getID());
 
 			return instruccion.executeUpdate();
 		} catch (Exception e) {

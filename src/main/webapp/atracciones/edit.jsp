@@ -49,7 +49,7 @@
 
 								<div class="mb-3">
 									<input class="form-control" name="id" placeholder="ID" readonly
-										hidden value="${atraccion.getID()}">
+										type="hidden" value="${atraccion.getID()}">
 								</div>
 
 								<div class="mb-3">
@@ -94,7 +94,7 @@
 								</div>
 
 								<div>
-									<button type="submit" class="btn btn-success">Guardar</button>
+									<button type="submit" class="btn btn-success">Editar</button>
 								</div>
 							</form>
 						</div>

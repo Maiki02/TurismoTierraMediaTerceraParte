@@ -1,7 +1,6 @@
 package controller.attractions;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
@@ -12,10 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.producto.*;
 import model.usuario.Usuario;
-import persistence.iAtraccionDAO;
-import persistence.commons.DAOFactory;
 import services.AttractionService;
-import services.BuyAttractionService;
 
 @WebServlet("/atracciones/buy.do")
 public class BuyAttractionServlet extends HttpServlet {

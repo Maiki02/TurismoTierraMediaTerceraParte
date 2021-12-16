@@ -32,7 +32,7 @@
 				</a>
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdown">
-						<li><a href="/TurismoTierraMedia/usuarios/perfil.do"
+						<li><a href="/TurismoTierraMedia/usuarios/perfil.do?id=${user.getID() }"
 							class="dropdown-item">Perfil</a></li>
 
 						<li><a class="dropdown-item disabled" style="color: black;">
