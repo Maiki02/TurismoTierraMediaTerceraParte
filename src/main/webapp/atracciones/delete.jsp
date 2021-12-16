@@ -8,6 +8,7 @@
 <jsp:include page="../partials/head.jsp"></jsp:include>
 <link href="../assets/stylesheets/base.css" rel="stylesheet" />
 <link href="../assets/stylesheets/delete.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -26,41 +27,46 @@
 
 	<c:if test="${user.esAdmin()}">
 		<div id="contenido-tabla">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Nombre</th>
-						<th scope="col">Costo</th>
-						<th scope="col">Duracion</th>
-						<th scope="col">Cupo</th>
-						<th scope="col">Tipo de atraccion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${atracciones}" var="atraccion">
+			<div class="my-3">
+				<div class="table-responsive" style="width:80%; margin:auto; background:#ffffffca;">
+					<table class="datatable table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Nombre</th>
+								<th scope="col">Costo</th>
+								<th scope="col">Duracion</th>
+								<th scope="col">Cupo</th>
+								<th scope="col">Tipo de atraccion</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${atracciones}" var="atraccion">
 
-						<tr>
-							<td>${atraccion.getNombre() }</td>
-							<td>${atraccion.getCosto() }</td>
-							<td>${atraccion.getDuracion() }</td>
-							<td>${atraccion.getCuposDisponibles() }</td>
-							<td>${atraccion.getTipoAtraccion() }</td>
-							<td>
-									
-								<div>
-								<form action="/TurismoTierraMedia/atracciones/delete.do" method="post">
-										<input class="form-control" name="id" placeholder="ID"
-											readonly hidden value="${atraccion.getID()}">
-										<button type="submit" class="btn btn-danger">Eliminar</button>
-								</form>
-								</div>
-							</td>
-						</tr>
+								<tr>
+									<td>${atraccion.getNombre() }</td>
+									<td>${atraccion.getCosto() }</td>
+									<td>${atraccion.getDuracion() }</td>
+									<td>${atraccion.getCuposDisponibles() }</td>
+									<td>${atraccion.getTipoAtraccion() }</td>
+									<td>
+
+										<div>
+											<form action="/TurismoTierraMedia/atracciones/delete.do"
+												method="post">
+												<input class="form-control" name="id" placeholder="ID"
+													readonly hidden value="${atraccion.getID()}">
+												<button type="submit" class="btn btn-danger">Eliminar</button>
+											</form>
+										</div>
+									</td>
+								</tr>
 
 
-					</c:forEach>
-				</tbody>
-			</table>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</c:if>
 </body>

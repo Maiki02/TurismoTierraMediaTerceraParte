@@ -25,41 +25,45 @@
 
 	<c:if test="${user.esAdmin()}">
 		<div id="contenido-tabla">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Nombre</th>
-						<th scope="col">Costo</th>
-						<th scope="col">Duracion</th>
-						<th scope="col">Tipo de atraccion</th>
-						<th scope="col">Tipo de promocion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${promociones}" var="promocion">
+			<div class="my-3">
+				<div class="table-responsive" style="width:80%; margin:auto; background:#ffffffca;">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Nombre</th>
+								<th scope="col">Costo</th>
+								<th scope="col">Duracion</th>
+								<th scope="col">Tipo de atraccion</th>
+								<th scope="col">Tipo de promocion</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${promociones}" var="promocion">
 
-						<tr>
-							<td>${promocion.getNombre() }</td>
-							<td>${promocion.getCosto() }</td>
-							<td>${promocion.getDuracion() }</td>
-							<td>${promocion.getTipoAtraccion() }</td>
-							<td>${promocion.getTipoPromocion() }</td>
-							<td>
-								<div>
-									<form action="/TurismoTierraMedia/promociones/delete.do"
-										method="post">
-										<input class="form-control" name="id" placeholder="ID"
-											readonly hidden value="${promocion.getID()}">
-										<button type="submit" class="btn btn-danger">Eliminar</button>
-									</form>
-								</div>
-							</td>
-						</tr>
+								<tr>
+									<td>${promocion.getNombre() }</td>
+									<td>${promocion.getCosto() }</td>
+									<td>${promocion.getDuracion() }</td>
+									<td>${promocion.getTipoAtraccion() }</td>
+									<td>${promocion.getTipoPromocion() }</td>
+									<td>
+										<div>
+											<form action="/TurismoTierraMedia/promociones/delete.do"
+												method="post">
+												<input class="form-control" name="id" placeholder="ID"
+													readonly hidden value="${promocion.getID()}">
+												<button type="submit" class="btn btn-danger">Eliminar</button>
+											</form>
+										</div>
+									</td>
+								</tr>
 
 
-					</c:forEach>
-				</tbody>
-			</table>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</c:if>
 </body>

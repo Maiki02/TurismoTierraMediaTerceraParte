@@ -7,6 +7,7 @@
 <jsp:include page="../partials/head.jsp"></jsp:include>
 <link href="../assets/stylesheets/base.css" rel="stylesheet" />
 <link href="../assets/stylesheets/tabla.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -14,7 +15,9 @@
 		<jsp:include page="../partials/nav.jsp"></jsp:include>
 
 		<main class="container">
-			<table class="table table-striped">
+		<div class="my-3">
+		<div class="table-responsive" style="width:80%; margin:auto;">
+			<table class="datatable table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">Nombre</th>
@@ -38,15 +41,18 @@
 							<td>${usuario.getHorasGastadas() }</td>
 							<td>
 								<div>
-									<a href="/TurismoTierraMedia/usuarios/perfil.do?id=${usuario.getID()}"><button
-											type="submit" class="btn btn-warning">INFO</button> </a>
+									<a
+										href="/TurismoTierraMedia/usuarios/perfil.do?id=${usuario.getID()}"><button
+											type="submit" class="btn btn-warning">VER MÁS</button> </a>
 								</div>
 								<div>
-									<a href="/TurismoTierraMedia/usuarios/delete.do?id=${usuario.getID() }"><button
+									<a
+										href="/TurismoTierraMedia/usuarios/delete.do?id=${usuario.getID() }"><button
 											type="submit" class="btn btn-danger">ELIMINAR</button> </a>
 								</div>
 								<div>
-									<a href="/TurismoTierraMedia/usuarios/edit.do?id=${usuario.getID() }"><button
+									<a
+										href="/TurismoTierraMedia/usuarios/edit.do?id=${usuario.getID() }"><button
 											type="submit" class="btn btn-success">EDITAR</button> </a>
 								</div>
 							</td>
@@ -56,6 +62,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			</div>
+			</div>
 		</main>
 
 	</c:if>

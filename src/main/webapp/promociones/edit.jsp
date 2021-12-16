@@ -28,7 +28,7 @@
 		<c:forEach items="${promociones}" var="promocion" varStatus="loop">
 
 			<div class="accordion accordion-flush mb-1"
-				id="accordionFlush-${loop.count}">
+				id="accordionFlush-${loop.count}" style="width:80%; margin:auto;">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="flush-heading-${loop.count}">
 						<button class="accordion-button collapsed" type="button"
