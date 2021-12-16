@@ -20,7 +20,7 @@
 				</p>
 			</div>
 		</c:if>
-		<form action="/TurismoTierraMedia/atracciones/create.do" method="post">
+		<form action="/TurismoTierraMedia/atracciones/create.do" method="post" style="width:80%; margin:auto;">
 			<jsp:include page="form.jsp"></jsp:include>
 		</form>
 

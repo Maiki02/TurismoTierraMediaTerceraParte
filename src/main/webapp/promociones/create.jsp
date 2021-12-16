@@ -27,7 +27,7 @@
 	<c:if test="${user.esAdmin()}">
 
 			<form action="/TurismoTierraMedia/promociones/create.do"
-				method="post">
+				method="post" style="width:80%; margin:auto;">
 
 				<div class="mb-3">
 					<input class="form-control input-lg" name="nombre"
