@@ -93,7 +93,7 @@
     width: 500px;
     margin-right: 40px;
     border-radius: 20px;
-
+	height: 300px;
 
 }
 
@@ -107,13 +107,13 @@
 }
 
 button {
-    background-color: rgb(107, 179, 35);
+	background-color: rgb(107, 179, 35);
     border: .1rem solid rgba(0, 0, 0, .10);
     border-radius: 5px;
     position: relative;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 20px;
-    margin: 20px;
+    margin: 40px;
     height: 35px;
     width: 150px;
 }
